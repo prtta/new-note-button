@@ -117,9 +117,9 @@ The initial implementation intentionally avoids becoming a general-purpose toolb
 
 ## Compatibility
 
-New Note Button is designed for Obsidian on iPhone and iPad. The button is
-intentionally hidden on desktop and Android. Keyboard-aware repositioning is
-not included in the current version.
+New Note Button requires Obsidian 1.13.7 or later and is designed for iPhone
+and iPad. The button is intentionally hidden on desktop and Android.
+Keyboard-aware repositioning is not included in the current version.
 
 ## License
 
