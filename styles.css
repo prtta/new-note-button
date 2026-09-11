@@ -1,0 +1,40 @@
+button.new-note-button {
+  position: fixed;
+  right: calc(16px + env(safe-area-inset-right, 0px));
+  bottom: calc(16px + var(--mobile-navbar-height, 48px) + env(safe-area-inset-bottom, 0px));
+  z-index: var(--layer-popover, 30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  box-shadow: var(--shadow-s);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button.new-note-button:hover,
+button.new-note-button:active {
+  background: var(--interactive-accent-hover);
+}
+
+button.new-note-button:focus-visible {
+  outline: 2px solid var(--text-normal);
+  outline-offset: 3px;
+}
+
+button.new-note-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+button.new-note-button svg {
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+}
