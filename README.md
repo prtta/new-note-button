@@ -20,6 +20,7 @@ The button is rendered independently from Obsidian's tab/title bar, so it does n
 - Designed primarily for Obsidian Mobile / iOS
 - One-tap note creation
 - Opens the newly created note immediately
+- Hides while either mobile sidebar is open
 - Respects the iOS safe area
 - Uses Obsidian theme variables where possible
 - Independent from the title bar and tab bar

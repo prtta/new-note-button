@@ -9,6 +9,15 @@ export default class NewNoteButtonPlugin extends Plugin {
     this.unloaded = false;
     if (!Platform.isIosApp) return;
 
+    this.registerEvent(this.app.workspace.on("layout-change", () => {
+      this.updateButtonVisibility();
+    }));
+    // Mobile drawer gestures may finish without a layout-change notification,
+    // or update collapsed after it. Reconcile the public state independently.
+    this.registerInterval(window.setInterval(() => {
+      this.updateButtonVisibility();
+    }, 200));
+
     this.app.workspace.onLayoutReady(() => {
       if (this.unloaded || this.button) return;
 
@@ -21,6 +30,7 @@ export default class NewNoteButtonPlugin extends Plugin {
       this.registerDomEvent(button, "click", () => { void this.createNote(); });
       document.body.appendChild(button);
       this.button = button;
+      this.updateButtonVisibility();
     });
   }
 
@@ -28,6 +38,14 @@ export default class NewNoteButtonPlugin extends Plugin {
     this.unloaded = true;
     this.button?.remove();
     this.button = null;
+  }
+
+  private updateButtonVisibility(): void {
+    if (!this.button) return;
+
+    const { leftSplit, rightSplit } = this.app.workspace;
+    const hidden = !leftSplit.collapsed || !rightSplit.collapsed;
+    if (this.button.hidden !== hidden) this.button.hidden = hidden;
   }
 
   private async createNote(): Promise<void> {

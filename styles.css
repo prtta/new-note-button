@@ -18,6 +18,10 @@ button.new-note-button {
   touch-action: manipulation;
 }
 
+button.new-note-button[hidden] {
+  display: none;
+}
+
 button.new-note-button:hover,
 button.new-note-button:active {
   background: var(--interactive-accent-hover);
