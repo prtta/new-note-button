@@ -26,34 +26,26 @@ The button is rendered independently from Obsidian's tab/title bar, so it does n
 - Independent from the title bar and tab bar
 - No dependency on Commander
 
-## Planned Features
-
-Possible future additions include:
-
-- Configurable button position
-- Configurable button size
-- Configurable icon
-- Custom destination folder
-- Template selection
-- Long-press actions
-- Hide or reposition the button while the software keyboard is visible
-- Improved iPad support
-- Optional Android support
-
 ## Installation
 
-The plugin is currently under development.
+### Community plugins
+
+Once the plugin is listed in the Obsidian Community Plugins directory:
+
+1. Open **Settings → Community plugins** in Obsidian.
+2. Select **Browse** and search for **New Note Button**.
+3. Install the plugin, then enable it.
 
 ### Manual installation
 
-Build locally with `npm install` and `npm run build`, or download a release when available:
+Download the latest release from GitHub:
 
-1. Download the latest release.
+1. Download `main.js`, `manifest.json`, and `styles.css` from the latest release.
 2. Create the following directory inside your vault:
 
    `.obsidian/plugins/new-note-button/`
 
-3. Place `main.js`, `manifest.json`, and `styles.css` inside that directory.
+3. Place the three downloaded files inside that directory.
 4. Restart Obsidian.
 5. Open:
 
@@ -67,7 +59,7 @@ Clone this repository into your Obsidian development vault:
 
 ```bash
 cd /path/to/vault/.obsidian/plugins
-git clone <repository-url> new-note-button
+git clone https://github.com/prtta/new-note-button.git
 cd new-note-button
 npm install
 npm run dev
@@ -78,29 +70,35 @@ Reload Obsidian after making changes.
 Run `npm run build` for a type-checked production build and `npm test` for
 automated lifecycle and note-creation checks using a mocked Obsidian API.
 
-The button appears only in the iOS app (including iPad), not on desktop or
-Android. It creates an empty `Untitled.md` in the location selected in
-Obsidian's new-note settings, adding a numeric suffix when needed, then opens
-the note in editing mode. A failed open leaves the created note in the vault.
+## How it works
 
-Before release, verify on an iPhone that the button clears the navigation
-controls and safe area in portrait and landscape, including with the keyboard
-open. Check Default and Minimal in light/dark mode, all new-note location
-settings, repeated taps, and disabling/re-enabling the plugin. Keyboard-aware
-repositioning is not implemented in this version.
+The button creates an empty `Untitled.md` in the location selected in
+Obsidian's new-note settings and immediately opens it in editing mode. If that
+name already exists, the plugin uses `Untitled 1.md`, `Untitled 2.md`, and so
+on. Existing files are never overwritten.
+
+The button is hidden while either mobile sidebar is open and returns when the
+sidebar closes.
+
+## Privacy
+
+New Note Button works entirely inside your vault. It does not use network
+connections, accounts, analytics, telemetry, or advertising.
 
 ## Project Structure
 
 ```text
 new-note-button/
 ├── README.md
+├── LICENSE
 ├── AGENTS.md
 ├── manifest.json
 ├── package.json
 ├── tsconfig.json
 ├── esbuild.config.mjs
 ├── main.ts
-└── styles.css
+├── styles.css
+└── tests/
 ```
 
 ## Design Principles
@@ -119,19 +117,10 @@ The initial implementation intentionally avoids becoming a general-purpose toolb
 
 ## Compatibility
 
-Initial target:
-
-- Obsidian Mobile
-- iOS / iPhone
-
-The button is intentionally hidden on desktop and Android.
-
-## Status
-
-🚧 **Early development**
-
-The plugin is not yet ready for general use.
+New Note Button is designed for Obsidian on iPhone and iPad. The button is
+intentionally hidden on desktop and Android. Keyboard-aware repositioning is
+not included in the current version.
 
 ## License
 
-MIT
+[MIT](LICENSE) © 2026 prtta
