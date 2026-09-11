@@ -21,14 +21,16 @@ export default class NewNoteButtonPlugin extends Plugin {
     this.app.workspace.onLayoutReady(() => {
       if (this.unloaded || this.button) return;
 
-      const button = document.createElement("button");
-      button.className = "new-note-button";
-      button.type = "button";
-      button.setAttribute("aria-label", "Create new note");
-      button.title = "Create new note";
+      const button = document.body.createEl("button", {
+        cls: "new-note-button",
+        attr: {
+          type: "button",
+          "aria-label": "Create new note",
+          title: "Create new note",
+        },
+      });
       setIcon(button, "plus");
       this.registerDomEvent(button, "click", () => { void this.createNote(); });
-      document.body.appendChild(button);
       this.button = button;
       this.updateButtonVisibility();
     });

@@ -58,8 +58,18 @@ function setup(ios = true) {
       setInterval(fn) { const id = ++nextInterval; intervals.set(id, fn); return id; },
     },
     document: {
-      createElement() { return { setAttribute(key, value) { this[key] = value; }, remove() { buttons.splice(buttons.indexOf(this), 1); } }; },
-      body: { appendChild(button) { buttons.push(button); } },
+      body: {
+        createEl(tag, options) {
+          const button = {
+            tag,
+            className: options.cls,
+            ...options.attr,
+            remove() { buttons.splice(buttons.indexOf(this), 1); },
+          };
+          buttons.push(button);
+          return button;
+        },
+      },
     },
   };
   vm.runInNewContext(outputFiles[0].text, context);
